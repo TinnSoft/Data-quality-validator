@@ -1,0 +1,541 @@
+{
+    "ExcludedCountries": [
+        "PR",
+        "US"
+    ],
+    "RulesEngine": [
+        {
+            "ValidationType": "Detection",
+            "Table": "fnc_analitico.dwh_dmatrizcampana",
+            "Column": "PrecioNormalMN",
+            "IssueType": "NULL & Zeros",
+            "Join": [
+                {
+                    "Value": "INNER JOIN fnc_analitico.dwh_dtipooferta WITH (NOLOCK) ON fnc_analitico.dwh_dmatrizcampana.codpais = fnc_analitico.dwh_dtipooferta.codpais and fnc_analitico.dwh_dmatrizcampana.CODTIPOOFERTA = fnc_analitico.dwh_dtipooferta.CODTIPOOFERTA"
+                },
+                {
+                    "Value": "INNER JOIN fnc_analitico.dwh_fvtaproebecam WITH (NOLOCK) on fnc_analitico.dwh_dmatrizcampana.aniocampana  = fnc_analitico.dwh_fvtaproebecam.aniocampanaref and fnc_analitico.dwh_dmatrizcampana.codventa =fnc_analitico.dwh_fvtaproebecam.codventa and fnc_analitico.dwh_dmatrizcampana.codpais = fnc_analitico.dwh_fvtaproebecam.codpais"
+                }
+            ],
+            "Where": [
+                {
+                    "ParentFilter": "AND fnc_analitico.dwh_dtipooferta.codtipoprofit = '01'",
+                    "CustomFilter": "AND (fnc_analitico.dwh_dmatrizcampana.PrecioNormalMN=0 OR fnc_analitico.dwh_dmatrizcampana.PrecioNormalMN IS NULL)"
+                }
+            ],
+            "GroupBy": [
+                {
+                    "Column": "codpais"
+                }
+            ],
+            "OrderBy": [
+                {
+                    "Column": "codpais",
+                    "Type": "ASC"
+                }
+            ]
+        },
+        {
+            "ValidationType": "Detection",
+            "Table": "fnc_analitico.dwh_dmatrizcampana",
+            "Column": "PrecioOferta",
+            "IssueType": "NULL",
+            "Join": [
+                {
+                    "Value": "INNER JOIN fnc_analitico.dwh_dtipooferta WITH (NOLOCK) ON fnc_analitico.dwh_dmatrizcampana.codpais = fnc_analitico.dwh_dtipooferta.codpais and fnc_analitico.dwh_dmatrizcampana.CODTIPOOFERTA = fnc_analitico.dwh_dtipooferta.CODTIPOOFERTA"
+                },
+                {
+                    "Value": "INNER JOIN fnc_analitico.dwh_fvtaproebecam WITH (NOLOCK) on fnc_analitico.dwh_dmatrizcampana.aniocampana  = fnc_analitico.dwh_fvtaproebecam.aniocampanaref and fnc_analitico.dwh_dmatrizcampana.codventa =fnc_analitico.dwh_fvtaproebecam.codventa and fnc_analitico.dwh_dmatrizcampana.codpais = fnc_analitico.dwh_fvtaproebecam.codpais"
+                }
+            ],
+            "Where": [
+                {
+                    "ParentFilter": "AND fnc_analitico.dwh_dtipooferta.codtipoprofit = '01'",
+                    "CustomFilter": "AND fnc_analitico.dwh_dmatrizcampana.PrecioNormalMN IS NULL"
+                }
+            ],
+            "GroupBy": [
+                {
+                    "Column": "codpais"
+                }
+            ],
+            "OrderBy": [
+                {
+                    "Column": "codpais",
+                    "Type": "ASC"
+                }
+            ]
+        },
+        {
+            "ValidationType": "Detection",
+            "Table": "fnc_analitico.dwh_dmatrizcampana",
+            "Column": "codventa",
+            "IssueType": "NULL & Zeros",
+            "Join": [
+                {
+                    "Value": "INNER JOIN fnc_analitico.dwh_dtipooferta WITH (NOLOCK) ON fnc_analitico.dwh_dmatrizcampana.codpais = fnc_analitico.dwh_dtipooferta.codpais and fnc_analitico.dwh_dmatrizcampana.codtipooferta = fnc_analitico.dwh_dtipooferta.codtipooferta"
+                },
+                {
+                    "Value": "INNER JOIN fnc_analitico.dwh_fvtaproebecam WITH (NOLOCK) on fnc_analitico.dwh_dmatrizcampana.aniocampana  = fnc_analitico.dwh_fvtaproebecam.aniocampanaref and fnc_analitico.dwh_dmatrizcampana.codventa =fnc_analitico.dwh_fvtaproebecam.codventa and fnc_analitico.dwh_dmatrizcampana.codpais = fnc_analitico.dwh_fvtaproebecam.codpais"
+                }
+            ],
+            "Where": [
+                {
+                    "ParentFilter": "AND fnc_analitico.dwh_dtipooferta.codtipoprofit = '01'",
+                    "CustomFilter": "AND (fnc_analitico.dwh_dmatrizcampana.codventa=0 OR fnc_analitico.dwh_dmatrizcampana.codventa IS NULL)"
+                }
+            ],
+            "GroupBy": [
+                {
+                    "Column": "codpais"
+                }
+            ],
+            "OrderBy": [
+                {
+                    "Column": "codpais",
+                    "Type": "ASC"
+                }
+            ]
+        },
+        {
+            "ValidationType": "Detection",
+            "Table": "fnc_analitico.dwh_dmatrizcampana",
+            "Column": "codventa",
+            "IssueType": "Dimension de codtipoprofit < 5 carácteres",
+            "Join": [
+                {
+                    "Value": "INNER JOIN fnc_analitico.dwh_dtipooferta WITH (NOLOCK) ON fnc_analitico.dwh_dmatrizcampana.codpais = fnc_analitico.dwh_dtipooferta.codpais and fnc_analitico.dwh_dmatrizcampana.codtipooferta = fnc_analitico.dwh_dtipooferta.codtipooferta"
+                },
+                {
+                    "Value": "INNER JOIN fnc_analitico.dwh_fvtaproebecam WITH (NOLOCK) on fnc_analitico.dwh_dmatrizcampana.aniocampana  = fnc_analitico.dwh_fvtaproebecam.aniocampanaref and fnc_analitico.dwh_dmatrizcampana.codventa =fnc_analitico.dwh_fvtaproebecam.codventa and fnc_analitico.dwh_dmatrizcampana.codpais = fnc_analitico.dwh_fvtaproebecam.codpais"
+                }
+            ],
+            "Where": [
+                {
+                    "ParentFilter": "AND fnc_analitico.dwh_dtipooferta.codtipoprofit = '01'",
+                    "CustomFilter": "AND (len(fnc_analitico.dwh_dmatrizcampana.codventa)<5)"
+                }
+            ],
+            "GroupBy": [
+                {
+                    "Column": "codpais"
+                }
+            ],
+            "OrderBy": [
+                {
+                    "Column": "codpais",
+                    "Type": "ASC"
+                }
+            ]
+        },
+        {
+            "ValidationType": "Detection",
+            "Table": "fnc_analitico.dwh_dmatrizcampana",
+            "Column": "PrecioOferta",
+            "IssueType": "PrecioNormalMN < PrecioOferta",
+            "Join": [
+                {
+                    "Value": "INNER JOIN fnc_analitico.dwh_dtipooferta WITH (NOLOCK) ON fnc_analitico.dwh_dmatrizcampana.codpais = fnc_analitico.dwh_dtipooferta.codpais and fnc_analitico.dwh_dmatrizcampana.CODTIPOOFERTA = fnc_analitico.dwh_dtipooferta.CODTIPOOFERTA"
+                },
+                {
+                    "Value": "INNER JOIN fnc_analitico.dwh_fvtaproebecam WITH (NOLOCK) on fnc_analitico.dwh_dmatrizcampana.aniocampana  = fnc_analitico.dwh_fvtaproebecam.aniocampanaref and fnc_analitico.dwh_dmatrizcampana.codventa =fnc_analitico.dwh_fvtaproebecam.codventa and fnc_analitico.dwh_dmatrizcampana.codpais = fnc_analitico.dwh_fvtaproebecam.codpais"
+                }
+            ],
+            "Where": [
+                {
+                    "ParentFilter": "AND fnc_analitico.dwh_dtipooferta.codtipoprofit = '01'",
+                    "CustomFilter": "AND fnc_analitico.dwh_dmatrizcampana.PrecioNormalMN<fnc_analitico.dwh_dmatrizcampana.PrecioOferta"
+                }
+            ],
+            "GroupBy": [
+                {
+                    "Column": "codpais"
+                }
+            ],
+            "OrderBy": [
+                {
+                    "Column": "codpais",
+                    "Type": "ASC"
+                }
+            ]
+        },
+        {
+            "ValidationType": "Detection",
+            "Table": "fnc_analitico.dwh_dmatrizcampana",
+            "Column": "IndicadorNuevoTono",
+            "IssueType": "IndicadorNuevoTono con valores != a 0,1,2",
+            "Join": [
+                {
+                    "Value": "INNER JOIN fnc_analitico.dwh_dtipooferta WITH (NOLOCK) ON fnc_analitico.dwh_dmatrizcampana.codpais = fnc_analitico.dwh_dtipooferta.codpais and fnc_analitico.dwh_dmatrizcampana.CODTIPOOFERTA = fnc_analitico.dwh_dtipooferta.CODTIPOOFERTA"
+                },
+                {
+                    "Value": "INNER JOIN fnc_analitico.dwh_fvtaproebecam WITH (NOLOCK) on fnc_analitico.dwh_dmatrizcampana.aniocampana  = fnc_analitico.dwh_fvtaproebecam.aniocampanaref and fnc_analitico.dwh_dmatrizcampana.codventa =fnc_analitico.dwh_fvtaproebecam.codventa and fnc_analitico.dwh_dmatrizcampana.codpais = fnc_analitico.dwh_fvtaproebecam.codpais"
+                }
+            ],
+            "Where": [
+                {
+                    "ParentFilter": "AND fnc_analitico.dwh_dtipooferta.codtipoprofit = '01'",
+                    "CustomFilter": "AND fnc_analitico.dwh_dmatrizcampana.IndicadorNuevoTono NOT IN (0,1,2)"
+                }
+            ],
+            "GroupBy": [
+                {
+                    "Column": "codpais"
+                }
+            ],
+            "OrderBy": [
+                {
+                    "Column": "codpais",
+                    "Type": "ASC"
+                }
+            ]
+        },
+        {
+            "ValidationType": "Detection",
+            "Table": "fnc_analitico.dwh_dmatrizcampana",
+            "Column": "Ncampaign", 
+            "IssueType": "Ncampaign con valores >= 100",
+            "Join": [
+                {
+                    "Value": "INNER JOIN fnc_analitico.dwh_dtipooferta WITH (NOLOCK) ON fnc_analitico.dwh_dmatrizcampana.codpais = fnc_analitico.dwh_dtipooferta.codpais and fnc_analitico.dwh_dmatrizcampana.CODTIPOOFERTA = fnc_analitico.dwh_dtipooferta.CODTIPOOFERTA"
+                },
+                {
+                    "Value": "INNER JOIN fnc_analitico.dwh_fvtaproebecam WITH (NOLOCK) on fnc_analitico.dwh_dmatrizcampana.aniocampana  = fnc_analitico.dwh_fvtaproebecam.aniocampanaref and fnc_analitico.dwh_dmatrizcampana.codventa =fnc_analitico.dwh_fvtaproebecam.codventa and fnc_analitico.dwh_dmatrizcampana.codpais = fnc_analitico.dwh_fvtaproebecam.codpais"
+                }
+            ],
+            "Where": [
+                {
+                    "ParentFilter": "AND fnc_analitico.dwh_dtipooferta.codtipoprofit = '01'",
+                    "CustomFilter": "AND fnc_analitico.dwh_dmatrizcampana.Ncampaign>=100"
+                }
+            ],
+            "GroupBy": [
+                {
+                    "Column": "codpais"
+                }
+            ],
+            "OrderBy": [
+                {
+                    "Column": "codpais",
+                    "Type": "ASC"
+                }
+            ]
+        },
+        {
+            "ValidationType": "Detection",
+            "Table": "fnc_analitico.dwh_fvtaproebecam",
+            "Column": "codventa",
+            "IssueType": "NULL & Zeros",
+            "Join": [
+                {
+                    "Value": "INNER JOIN fnc_analitico.dwh_dtipooferta WITH (NOLOCK) ON fnc_analitico.dwh_fvtaproebecam.codpais = fnc_analitico.dwh_dtipooferta.codpais and fnc_analitico.dwh_fvtaproebecam.codtipooferta = fnc_analitico.dwh_dtipooferta.codtipooferta"
+                }
+            ],
+            "Where": [
+                {
+                    "ParentFilter": "AND fnc_analitico.dwh_dtipooferta.codtipoprofit = '01' AND fnc_analitico.dwh_fvtaproebecam.aniocampana=fnc_analitico.dwh_fvtaproebecam.aniocampanaref",
+                    "CustomFilter": "AND (fnc_analitico.dwh_fvtaproebecam.codventa=0 OR fnc_analitico.dwh_fvtaproebecam.codventa IS NULL)"
+                }
+            ],
+            "GroupBy": [
+                {
+                    "Column": "codpais"
+                }
+            ],
+            "OrderBy": [
+                {
+                    "Column": "codpais",
+                    "Type": "ASC"
+                }
+            ]
+        },
+        {
+            "ValidationType": "Detection",
+            "Table": "fnc_analitico.dwh_fnumpedcam",
+            "Column": "realnropedidos",
+            "IssueType": "NULL & Zeros",
+            "Join": [],
+            "Where": [
+                {
+                    "ParentFilter": "",
+                    "CustomFilter": "AND (fnc_analitico.dwh_fnumpedcam.realnropedidos=0 OR fnc_analitico.dwh_fnumpedcam.realnropedidos IS NULL)"
+                }
+            ],
+            "GroupBy": [
+                {
+                    "Column": "codpais"
+                }
+            ],
+            "OrderBy": [
+                {
+                    "Column": "codpais",
+                    "Type": "ASC"
+                }
+            ]
+        },
+        {
+            "ValidationType": "Detection",
+            "Table": "fnc_analitico.dwh_fnumpedcam",
+            "Column": "realtcpromedio",
+            "IssueType": "NULL & Zeros",
+            "Join": [],
+            "Where": [
+                {
+                    "ParentFilter": "",
+                    "CustomFilter": "AND (fnc_analitico.dwh_fnumpedcam.realtcpromedio=0 OR fnc_analitico.dwh_fnumpedcam.realtcpromedio IS NULL)"
+                }
+            ],
+            "GroupBy": [
+                {
+                    "Column": "codpais"
+                }
+            ]
+        },
+        {
+            "ValidationType": "Detection",
+            "Table": "fnc_analitico.ctr_cierre_generico",
+            "Column": "estadocierre",
+            "IssueType": "Estado de Cierre != 1",
+            "Join": [],
+            "Where": [
+                {
+                    "ParentFilter": "AND fnc_analitico.ctr_cierre_generico.estadocierre!=1",
+                    "CustomFilter": ""
+                }
+            ],
+            "GroupBy": [
+                {
+                    "Column": "codpais"
+                }
+            ]
+        },
+        {
+            "ValidationType": "Evaluation",
+            "Table": "fnc_analitico.dwh_dmatrizcampana",
+            "IssueType": "Intervalo de Confianza",
+            "Columns": "DesExposicion",
+            "ColumnFunction": "count(*)",
+            "Join": [],
+            "Where": [
+                {
+                    "Value": "AND aniocampana >= concat(extract(year from GETDATE())-4,'0000')"
+                },
+                {
+                    "Value": "AND DesUbicacionCatalogo IS NOT NULL and DesUbicacionCatalogo != ''"
+                }
+            ],
+            "GroupBy": "codpais,DesUbicacionCatalogo"
+        },
+        {
+            "ValidationType": "Evaluation",
+            "Table": "fnc_analitico.dwh_dmatrizcampana",
+            "IssueType": "Intervalo de Confianza",
+            "Columns": "DesExposicion",
+            "ColumnFunction": "count(*)",
+            "Join": [],
+            "Where": [
+                {
+                    "Value": "AND aniocampana >= concat(extract(year from GETDATE())-4,'0000')"
+                },
+                {
+                    "Value": "AND DesExposicion IS NOT NULL and DesExposicion != ''"
+                }
+            ],
+            "GroupBy": "codpais,DesExposicion"
+        },
+        {
+            "ValidationType": "Evaluation",
+            "Table": "fnc_analitico.dwh_dmatrizcampana",
+            "IssueType": "Intervalo de Confianza",
+            "Columns": "FlagBulk",
+            "ColumnFunction": "count(*)",
+            "Join": [],
+            "Where": [
+                {
+                    "Value": "AND aniocampana >= concat(extract(year from GETDATE())-4,'0000')"
+                },
+                {
+                    "Value": "AND FlagBulk IS NOT NULL and FlagBulk != ''"
+                }
+            ],
+            "GroupBy": "codpais,FlagBulk"
+        },
+        {
+            "ValidationType": "Evaluation",
+            "Table": "fnc_analitico.dwh_dmatrizcampana",
+            "IssueType": "Intervalo de Confianza",
+            "Columns": "FlagDiscover",
+            "ColumnFunction": "count(*)",
+            "Join": [],
+            "Where": [
+                {
+                    "Value": "AND aniocampana >= concat(extract(year from GETDATE())-4,'0000')"
+                },
+                {
+                    "Value": "AND FlagDiscover IS NOT NULL and FlagDiscover != ''"
+                }
+            ],
+            "GroupBy": "codpais,FlagDiscover"
+        },
+        {
+            "ValidationType": "Evaluation",
+            "Table": "fnc_analitico.dwh_dmatrizcampana",
+            "IssueType": "Intervalo de Confianza",
+            "Columns": "FotoModelo",
+            "ColumnFunction": "count(*)",
+            "Join": [],
+            "Where": [
+                {
+                    "Value": "AND aniocampana >= concat(extract(year from GETDATE())-4,'0000')"
+                },
+                {
+                    "Value": "AND FotoModelo IS NOT NULL and FotoModelo != ''"
+                }
+            ],
+            "GroupBy": "codpais,FotoModelo"
+        },
+        {
+            "ValidationType": "Evaluation",
+            "Table": "fnc_analitico.dwh_dmatrizcampana",
+            "IssueType": "Intervalo de Confianza",
+            "Columns": "FotoProducto",
+            "ColumnFunction": "count(*)",
+            "Join": [],
+            "Where": [
+                {
+                    "Value": "AND aniocampana >= concat(extract(year from GETDATE())-4,'0000')"
+                },
+                {
+                    "Value": "AND FotoProducto IS NOT NULL and FotoProducto != ''"
+                }
+            ],
+            "GroupBy": "codpais,FotoProducto"
+        },
+        {
+            "ValidationType": "Evaluatio1",
+            "Table": "fnc_analitico.dwh_dmatrizcampana",
+            "IssueType": "Intervalo de Confianza",
+            "Columns": "NroPaginas",
+            "ColumnFunction": "count(*)",
+            "Join": [],
+            "Where": [
+                {
+                    "Value": "AND aniocampana >= concat(extract(year from GETDATE())-4,'0000')"
+                }
+            ],
+            "GroupBy": "codpais,NroPaginas"
+        },
+        {
+            "ValidationType": "Evaluation",
+            "Table": "fnc_analitico.dwh_fvtaproebecam",
+            "IssueType": "Intervalo de Confianza",
+            "Columns": "realanulmnneto",
+            "ColumnFunction": "round(cast(sum(ISNULL(realanulmnneto,0)) as float),10)",
+            "Join": [],
+            "Where": [
+                {
+                    "Value": "AND aniocampana >= concat(extract(year from GETDATE())-4,'0000')"
+                }
+            ],
+            "GroupBy": "codpais"
+        },
+        {
+            "ValidationType": "Evaluation",
+            "Table": "fnc_analitico.dwh_fvtaproebecam",
+            "IssueType": "Intervalo de Confianza",
+            "Columns": "realdevmnneto",
+            "ColumnFunction": "round(cast(sum(ISNULL(realdevmnneto,0)) as float),10)",
+            "Join": [],
+            "Where": [
+                {
+                    "Value": "AND aniocampana >= concat(extract(year from GETDATE())-4,'0000')"
+                }
+            ],
+            "GroupBy": "codpais"
+        },
+        {
+            "ValidationType": "Evaluation",
+            "Table": "fnc_analitico.dwh_fvtaproebecam",
+            "IssueType": "Intervalo de Confianza",
+            "Columns": "realuuanuladas",
+            "ColumnFunction": "round(cast(sum(ISNULL(realuuanuladas,0)) as float),10)",
+            "Join": [],
+            "Where": [
+                {
+                    "Value": "AND aniocampana >= concat(extract(year from GETDATE())-4,'0000')"
+                }
+            ],
+            "GroupBy": "codpais"
+        },
+        {
+            "ValidationType": "Evaluation",
+            "Table": "fnc_analitico.dwh_fvtaproebecam",
+            "IssueType": "Intervalo de Confianza",
+            "Columns": "Realuudevueltas",
+            "ColumnFunction": "round(cast(sum(ISNULL(Realuudevueltas,0)) as float),10)",
+            "Join": [],
+            "Where": [
+                {
+                    "Value": "AND aniocampana >= concat(extract(year from GETDATE())-4,'0000')"
+                }
+            ],
+            "GroupBy": "codpais"
+        },
+        {
+            "ValidationType": "Evaluation",
+            "Table": "fnc_analitico.dwh_fvtaproebecam",
+            "IssueType": "Intervalo de Confianza",
+            "Columns": "Realuufaltantes",
+            "ColumnFunction": "round(cast(sum(ISNULL(Realuufaltantes,0)) as float),10)",
+            "Join": [],
+            "Where": [
+                {
+                    "Value": "AND aniocampana >= concat(extract(year from GETDATE())-4,'0000')"
+                }
+            ],
+            "GroupBy": "codpais"
+        },
+        {
+            "ValidationType": "Evaluation",
+            "Table": "fnc_analitico.dwh_fvtaproebecam",
+            "IssueType": "Intervalo de Confianza",
+            "Columns": "realvtamnfaltneto",
+            "ColumnFunction": "round(cast(sum(ISNULL(realvtamnfaltneto,0)) as float),10)",
+            "Join": [],
+            "Where": [
+                {
+                    "Value": "AND aniocampana >= concat(extract(year from GETDATE())-4,'0000')"
+                }
+            ],
+            "GroupBy": "codpais"
+        },
+        {
+            "ValidationType": "Evaluation",
+            "Table": "fnc_analitico.dwh_fvtaproebecam",
+            "IssueType": "Intervalo de Confianza",
+            "Columns": "RealVtaMNNeto",
+            "ColumnFunction": "round(cast(sum(ISNULL(RealVtaMNNeto,0)) as float),10)",
+            "Join": [],
+            "Where": [
+                {
+                    "Value": "AND aniocampana >= concat(extract(year from GETDATE())-4,'0000')"
+                }
+            ],
+            "GroupBy": "codpais"
+        },
+        {
+            "ValidationType": "Evaluation",
+            "Table": "fnc_analitico.dwh_fvtaproebecam",
+            "IssueType": "Intervalo de Confianza",
+            "Columns": "RealUUVendidas",
+            "ColumnFunction": "round(cast(sum(ISNULL(RealUUVendidas,0)) as float),10)",
+            "Join": [],
+            "Where": [
+                {
+                    "Value": "AND aniocampana >= concat(extract(year from GETDATE())-4,'0000')"
+                }
+            ],
+            "GroupBy": "codpais"
+        }
+    ]
+}
