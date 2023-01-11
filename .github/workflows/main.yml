@@ -1,0 +1,35 @@
+name: Deploy to DigitalOcean
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    
+    - name: Install dependencies
+      run: |
+        python -m venv venv
+        source venv/bin/activate
+        pip install -r requirements.txt
+
+    - name: Deploy to DigitalOcean
+      env:
+        DO_API_KEY: ${{ secrets.DO_API_KEY }}
+      run: |
+        # Use the DigitalOcean API to create a new droplet
+        curl -X POST "https://api.digitalocean.com/v2/droplets" \
+          -d'{"name":"my-app","region":"nyc3","size":"s-1vcpu-1gb","image":"ubuntu-20-04-x64","ssh_keys":["<your-ssh-key-id>"],"backups":false,"ipv6":true,"user_data":"#!/bin/bash\nsudo apt-get update\nsudo apt-get install -y python3\nsudo apt-get install -y python3-pip\ngit clone https://github.com/<username>/<repo>.git\ncd <repo>\npython3 -m venv venv\nsource venv/bin/activate\npip install -r requirements.txt\n"}' \
+          -H "Authorization: Bearer $DO_API_KEY" \
+          -H "Content-Type: application/json"
